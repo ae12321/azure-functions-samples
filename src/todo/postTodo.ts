@@ -18,7 +18,7 @@ async function postTodo(
     throw new Error("title is not exist");
   }
 
-  reducer.pushTodos(body.title, body.description);
+  await reducer.pushTodos(body.title, body.description);
 
   return { body: "created" };
 }

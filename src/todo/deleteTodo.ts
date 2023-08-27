@@ -12,7 +12,7 @@ async function deleteTodo(
 ): Promise<HttpResponseInit> {
   const id = +request.params.id;
 
-  reducer.deleteTodo(id);
+  await reducer.deleteTodo(id);
 
   return { body: "delete done" };
 }

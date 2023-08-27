@@ -6,7 +6,7 @@ GET {{baseUrl}}/todos/1
 ### getTodos
 GET {{baseUrl}}/todos
 ###
-GET {{baseUrl}}/todos?sort=desc&start=2023-01-03
+GET {{baseUrl}}/todos?sort=asc&start=2023-01-06
 
 ### postTodo
 POST {{baseUrl}}/todos
@@ -23,8 +23,8 @@ PUT {{baseUrl}}/todos/1
 Content-Type: application/json
 
 {
-    "title": "sample",
-    "description": "asdf"
+    "title": "aaa",
+    "description": "bbb"
 }
 
 ### deleteTodo

@@ -1,3 +1,5 @@
+import { query } from "../utils/db";
+
 export type Todo = {
   id: number;
   title: string;
@@ -26,30 +28,33 @@ const todoData: Todo[] = [
   },
 ];
 
-export const getTodo = (id: number) => {
-  return todoData.find((todo) => todo.id === id);
+export const getTodo = async (id: number) => {
+  const res = await query("select * from todo where id = $1", [id]);
+  const [todo] = res.rows;
+  return todo as Todo;
 };
-export const getTodos = () => {
-  return todoData;
+export const getTodos = async () => {
+  const res = await query("select * from todo", []);
+  const todos = res.rows;
+  return todos as Todo[];
 };
-export const pushTodos = (title: string, description: string) => {
-  const ids = todoData.map((todo) => todo.id);
-  const nextId = Math.max(...ids) + 1;
-  const newData: Todo = {
-    id: nextId,
+export const pushTodos = async (title: string, description: string) => {
+  await query("insert into todo(title, description) values($1, $2)", [
     title,
     description,
-    created_at: new Date().toISOString().split("T")[0],
-  };
-  todoData.push(newData);
+  ]);
 };
-export const putTodo = (id: number, title: string, description: string) => {
-  const data = getTodo(id);
-  data.title = title;
-  data.description = description;
-  data.created_at = new Date().toISOString().split("T")[0];
+export const putTodo = async (
+  id: number,
+  title: string,
+  description: string
+) => {
+  const now = new Date();
+  await query(
+    "update todo set title = $1, description = $2, created_at = $3 where id = $4",
+    [title, description, now, id]
+  );
 };
-export const deleteTodo = (id: number) => {
-  const index = todoData.findIndex((todo) => todo.id === id);
-  todoData.splice(index, 1);
+export const deleteTodo = async (id: number) => {
+  await query("delete from todo where id = $1", [id]);
 };

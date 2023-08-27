@@ -22,10 +22,10 @@ async function putTodo(
   const body = JSON.parse(await request.text());
   context.log(body);
   if (!body.title) {
-    throw new Error("title is not exist");
+    throw new Error("title is not exista");
   }
 
-  reducer.putTodo(id, body.title, body.description);
+  await reducer.putTodo(id, body.title, body.description);
 
   return { body: "put done" };
 }

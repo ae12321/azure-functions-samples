@@ -12,7 +12,7 @@ async function getTodo(
 ): Promise<HttpResponseInit> {
   const id = +request.params.id;
 
-  const todo = reducer.getTodo(id);
+  const todo = await reducer.getTodo(id);
   if (!todo) {
     return {
       status: 404,
