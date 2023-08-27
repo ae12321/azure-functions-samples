@@ -1,15 +1,27 @@
 # azure-functions-sample
 
 ・メソッド名を取得できる
-・URLを取得できる
-・bodyを取得できる
-・header内容を取得できる
+・URL を取得できる
+・body を取得できる
+・header 内容を取得できる
 ・クエリパラメータを取得できる
 ・パスパラメータを取得できる
 
-クエリパラメータvsパスパラメータ
+クエリパラメータ vs パスパラメータ
 ・省略できるかどうか
 ・リソースの一意特定で必要かどうか
+
+# 環境変数
+
+PROJECT_DATABASE_HOST = localhost
+PROJECT_DATABASE_PORT = 5432
+PROJECT_DATABASE_DB = mydb
+PROJECT_DATABASE_USER = sqluser
+PROJECT_DATABASE_PASS = abcde12345
+
+# 開発環境用
+
+docker compose -f .\scripts\database.yml up -d
 
 ```
 
